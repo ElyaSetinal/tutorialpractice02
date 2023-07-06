@@ -1,0 +1,10 @@
+### File ###
+Design.txt
+db.sqlite3
+
+### Extension ###
+*.origin
+
+### Directory ###
+venv
+__pycache__
