@@ -17,8 +17,12 @@ class DolistAdmin(admin.ModelAdmin):
     list_display = ["do_object", "create_time", "finish_time", ]
     readonly_fields = ["create_time", "finish_time", ]
 
-    actions = ["gotodone", ]
+    actions = ["gotodone", "gotodo", ]
 
     @admin.action(description="해당 할 일을 완료로 변경")
     def gotodone(modeladmin, request, queryset):
         queryset.update(finish_time=timezone.localtime()) 
+
+    @admin.action(description="완료 상태를 해제합니다.")
+    def gotodo(modeladmin, request, queryset):
+        queryset.update(finish_time=None) 

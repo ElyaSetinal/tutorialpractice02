@@ -17,8 +17,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from todolist.views import dolistdisplay, donelistdisplay
+from todolist.views import dolistdisplay, donelistdisplay, newlistcreate, workdone, donecancel
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path("", dolistdisplay, name='dolist'),
+    path("createprocessing/", newlistcreate, name='creating'),  # short-time passing page, for not use js
+    path("doneprocessing/", workdone, name='workdone'),  # short-time passing page, for not use js
+    path("cancelprocessing/", donecancel, name='donecancel'),  # short-time passing page, for not use js
+    path("done/", donelistdisplay, name='finishpage'),
 ]
