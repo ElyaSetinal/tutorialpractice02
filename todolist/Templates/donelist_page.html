@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+    <style>
+        .content{
+            height: 75%;
+        }
+        .messageDiv{
+            margin-top: 20px;
+            margin-bottom: 50px;
+        }
+        .custom-btn{
+            font-size: 10px;
+        }
+        .panel-footer{
+            height:10%;
+            color:gray;
+        }
+    </style>
+
+    <title>완료 목록</title>
+</head>
+
+<body>
+    {# only done, finish_time is exist. #}
+    <div class="container">
+        <div class="header">
+            <div class="page-header"><h1>done list</h1>
+        </div>
+    </div>
+
+    <div class="toDoDiv">
+        <ul class="list-group">
+            {% for i in obj %}
+            {% if i.finish_time %}
+                <form id="obj_display" action="{% url 'donecancel' %}" method="GET">
+                    <div class="input-group" name='todo1'>
+                        <li class="list-group-item" id="obj_name">{{i.do_object}}</li>
+                        <li class="list-group-item" id="obj_ct">생성 시간 : {{i.create_time}}, 완료 시간 : {{i.finish_time}}</li>
+                        <input type="hidden" id="todoNum" name="todoNum" value="{{ i.id }}">
+                        <span class="input-group-addon">
+                            <button type="submit" class="custom-btn btn btn-danger">취소</button>
+                        </span>
+                    </div>
+                </form>
+            {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
+
+    <a href="{% url 'dolist' %}">돌아가기</a>
+    </div>
+</body>
+</html>
